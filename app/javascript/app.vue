@@ -1,16 +1,30 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
+  <div>
+    <form>
+      <div>
+        <input placeholder="ex) naoya"></input>
+        <input placeholder="ex) react"></input>
+      </div>
+    </form>
+
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
   </div>
 </template>
 
 <script>
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
-  }
+  data: ()=> ({
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]
+  }),
+
 }
 </script>
 
