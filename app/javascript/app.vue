@@ -10,7 +10,15 @@
     <article v-for="episode in filteredUsers">
       <h2>{{ episode.title }}</h2>
       <p>{{ episode.description }}</p>
-      <a href="#">show noteを開く</a>
+      <div v-show="episode.show">
+        <a href="#" @click.prevent="onClickShowNoteLink(episode)">show noteを閉じる</a>
+        <p v-for="show_note in episode.show_notes">
+          <a :href="show_note.url">{{show_note.text}}</a>
+        </p>
+      </div>
+      <div v-show="!episode.show">
+        <a href="#" @click.prevent="onClickShowNoteLink(episode)">show noteを開く</a>
+      </div>
     </article>
   </div>
 </template>
@@ -28,7 +36,9 @@ export default {
 
   mounted () {
     axios.get('/episodes.json').then((response) => {
-      this.$data.episodes = response.data;
+      this.$data.episodes = response.data.map(
+        d => ({ ...d, show: false })
+      )
     });
   },
 
@@ -38,6 +48,14 @@ export default {
         ep.contributor_text.indexOf(this.contributor) !== -1 &&
           ep.show_note_full_text.indexOf(this.showNote) !== -1
       ));
+    }
+  },
+
+  methods: {
+    onClickShowNoteLink({id, show}) {
+      this.$data.episodes = this.$data.episodes.map(
+        e => (e.id === id ? { ...e, show: !show } : e)
+      )
     }
   }
 }
