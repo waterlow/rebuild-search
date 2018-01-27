@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: rebiuld_search_production
-  username: rebiuld_search
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  # username: rebiuld_search
+  # password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>

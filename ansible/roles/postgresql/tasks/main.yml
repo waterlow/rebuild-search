@@ -1,0 +1,40 @@
+---
+- name: fetch PostgreSQL 9.6 repo
+  yum:
+    name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7.2-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+    state: present
+
+- name: install postgresql packages
+  yum:
+    name: postgresql96*
+    state: present
+
+- name: Get status whethere db cluster is exist or not
+  stat:
+    path: /var/lib/pgsql/9.6/data/PG_VERSION
+  register: dbcluster
+
+- name: Create a new PostgreSQL database cluster
+  shell: /usr/pgsql-9.6/bin/postgresql96-setup initdb
+  when: not dbcluster.stat.exists
+
+- name: PostgreSQLを起動、自動起動の有効化
+  service:
+    name: postgresql-9.6
+    state: started
+    enabled: yes
+
+# - name: user exists?
+#   shell: psql -l
+#   register: user_exists
+#   ignore_errors: True
+#   become: yes
+#   become_user: vagrant
+#
+# # pythonのDBドライバと、インストールされるpythonのバージョンがコンフリクトすることがあるため
+# # postgresql_userは使わない
+# - name: add vagrant user
+#   shell: createuser vagrant -d -U postgres
+#   when: user_exists|failed
+#   become: yes
+#   become_user: postgres
