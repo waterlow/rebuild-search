@@ -61,5 +61,6 @@ gem 'mechanize'
 gem 'activerecord-import'
 gem 'actionpack-action_caching'
 gem 'activerecord-quiet_schema_version'
+gem 'therubyracer', platforms: :ruby
 
 ruby "2.4.2"

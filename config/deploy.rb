@@ -2,7 +2,8 @@
 lock "~> 3.10.1"
 
 set :application, "rebuild-search"
-set :repo_url, "git@example.com:me/rebuild-search.git"
+set :repo_url, "git@github.com:waterlow/rebuild-search.git"
+set :rails_env, "production"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
