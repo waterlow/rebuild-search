@@ -1,0 +1,9 @@
+---
+- name: mkdir ~/.bundle
+  file: path=/root/.bundle state=directory owner=root
+
+- name: set bundle config for pg
+  template: src=bundle_config dest=/root/.bundle/config
+
+- name: export env for rails
+  template: src=rails.sh dest=/etc/profile.d/rails.sh

@@ -24,17 +24,19 @@
     state: started
     enabled: yes
 
-# - name: user exists?
-#   shell: psql -l
-#   register: user_exists
-#   ignore_errors: True
-#   become: yes
-#   become_user: vagrant
-#
-# # pythonのDBドライバと、インストールされるpythonのバージョンがコンフリクトすることがあるため
-# # postgresql_userは使わない
-# - name: add vagrant user
-#   shell: createuser vagrant -d -U postgres
-#   when: user_exists|failed
-#   become: yes
-#   become_user: postgres
+- name: user exists?
+  shell: psql -l
+  register: user_exists
+  ignore_errors: True
+
+# pythonのDBドライバと、インストールされるpythonのバージョンがコンフリクトすることがあるため
+# postgresql_userは使わない
+- name: add root user
+  shell: createuser root -d
+  when: user_exists|failed
+  become: yes
+  become_user: postgres
+
+- name: add db
+  shell: createdb rebiuld_search_production
+  when: user_exists|failed

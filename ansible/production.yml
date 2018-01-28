@@ -1,5 +1,10 @@
 ---
 - hosts: production
   become: true
+  user: root
   roles:
-    - postgresql
+    # - postgresql
+    # - system
+    # - ruby
+    # - nginx
+    - app

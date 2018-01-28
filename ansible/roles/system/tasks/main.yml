@@ -1,0 +1,5 @@
+- name: ロケール設定
+  command: localectl set-locale LANG=ja_JP.UTF-8
+
+- name: タイムゾーン設定
+  command: timedatectl set-timezone Asia/Tokyo

@@ -1,0 +1,30 @@
+- name: install yum packages
+  yum: name={{ item }} state=present
+  with_items:
+    - git
+    - gcc-c++
+    - openssl-devel
+    - libyaml-devel
+    - readline-devel
+    - zlib-devel
+
+- name: clone rbenv
+  git: repo=https://github.com/sstephenson/rbenv.git dest={{ rbenv_dir }}
+
+- name: put rbenv script
+  template: src=rbenv.sh dest={{ rbenv_script }}
+
+- name: clone ruby-build
+  git: repo=https://github.com/sstephenson/ruby-build.git dest={{ rbenv_dir }}/plugins/ruby-build
+
+- name: check ruby {{ ruby_version }} installed
+  shell: source {{ rbenv_script }}; rbenv versions | grep {{ ruby_version }}
+  register: ruby_installed
+  ignore_errors: True
+
+- name: install ruby
+  shell: source {{ rbenv_script }}; rbenv install {{ ruby_version }}; rbenv global {{ ruby_version }}; rbenv rehash
+  when: ruby_installed|failed
+
+- name: install bundler
+  shell: source {{ rbenv_script }}; gem install bundler; rbenv rehash

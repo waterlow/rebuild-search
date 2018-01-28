@@ -1,0 +1,18 @@
+---
+- name: put nginx repo file
+  template: src=nginx.repo dest=/etc/yum.repos.d/nginx.repo
+
+- name: install nginx
+  yum: name=nginx state=present
+
+- name: make application directory
+  file: path=/var/www/{{ app_name }} state=directory
+
+- name: put nginx conf file
+  template: src=app.conf.j2 dest=/etc/nginx/conf.d/app.conf
+
+- name: set process owner to root
+  lineinfile: >
+    dest=/etc/nginx/nginx.conf
+    regexp='user nginx;'
+    line='user root;'
