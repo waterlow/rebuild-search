@@ -3,8 +3,9 @@
   become: true
   user: root
   roles:
-    # - postgresql
-    # - system
-    # - ruby
-    # - nginx
+    - postgresql
+    - system
+    - ruby
+    - nginx
+    - node
     - app

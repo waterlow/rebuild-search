@@ -11,8 +11,8 @@
 - name: put nginx conf file
   template: src=app.conf.j2 dest=/etc/nginx/conf.d/app.conf
 
-- name: set process owner to root
-  lineinfile: >
-    dest=/etc/nginx/nginx.conf
-    regexp='user nginx;'
-    line='user root;'
+# - name: set process owner to root
+#   lineinfile: >
+#     dest=/etc/nginx/nginx.conf
+#     regexp='user nginx;'
+#     line='user root;'
