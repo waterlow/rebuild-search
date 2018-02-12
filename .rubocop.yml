@@ -7,5 +7,14 @@ inherit_gem:
 
 AllCops:
   TargetRubyVersion: 2.4
-  # uncomment if use rails cops
-  # TargetRailsVersion: 5.1
+  TargetRailsVersion: 5.1
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  Exclude:
+    - "vendor/**/*" # rubocop config/default.yml
+    - 'node_modules/**/*'
+    - 'bin/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'Rakefile'
+    - 'Capfile'
