@@ -19,8 +19,7 @@ chdir APP_ROOT do
   system('bundle check') || system!('bundle install')
 
   puts "\n== Updating database =="
-  system! 'bundle exec ridgepole -c config/database.yml -a'
-  system! 'bundle exec ridgepole -c config/database.yml -a -E test'
+  system! 'bin/rails db:migrate'
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
