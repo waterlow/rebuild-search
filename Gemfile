@@ -8,7 +8,6 @@ end
 gem "actionpack-action_caching"
 gem "activerecord-import"
 gem "activerecord-quiet_schema_version"
-gem "jbuilder", "~> 2.5"
 gem "mechanize"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.7"
