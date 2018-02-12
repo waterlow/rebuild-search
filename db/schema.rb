@@ -23,8 +23,8 @@ ActiveRecord::Schema.define() do
   end
 
   create_table "episode_contributors", force: :cascade do |t|
-    t.integer "episode_id", null: false
-    t.integer "contributor_id", null: false
+    t.bigint "episode_id", null: false
+    t.bigint "contributor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["contributor_id"], name: "index_episode_contributors_on_contributor_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define() do
   end
 
   create_table "show_notes", force: :cascade do |t|
-    t.integer "episode_id", null: false
+    t.bigint "episode_id", null: false
     t.string "text", null: false
     t.text "url", null: false
     t.integer "position", null: false
