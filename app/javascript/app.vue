@@ -4,20 +4,21 @@ div
     div
       input(placeholder='ex) naoya', v-model='contributor')
       input(placeholder='ex) react', v-model='showNote')
-  article(v-for='episode in filteredUsers')
-    h2 {{ episode.title }}
-    p {{ episode.description }}
-    div(v-show='episode.show')
-      a(href='#', @click.prevent='onClickShowNoteLink(episode)') show noteを閉じる
-      p(v-for='show_note in episode.show_notes')
-        a(:href='show_note.url') {{show_note.text}}
-    div(v-show='!episode.show')
-      a(href='#', @click.prevent='onClickShowNoteLink(episode)') show noteを開く
+  article
+    EpisodeItem(v-for='episode in filteredUsers',
+                :key='episode.id',
+                :episode='episode',
+                :on-click='onClickShowNoteLink')
 </template>
 
 <script>
 import axios from 'axios'
+import EpisodeItem from './EpisodeItem.vue'
 export default {
+  components: {
+    EpisodeItem
+  },
+
   data () {
     return {
       contributor: '',
@@ -27,7 +28,7 @@ export default {
   },
 
   mounted () {
-    axios.get('/episodes.json').then((response) => {
+    axios.get('/episodes').then((response) => {
       this.$data.episodes = response.data.map(
         d => ({ ...d, show: false })
       )
