@@ -21,6 +21,7 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "pry-byebug"
   gem "pry-rails"
+  gem "rspec-rails", "~> 3.7.0"
 end
 
 group :development do
@@ -33,6 +34,12 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", ">= 3.3.0"
+end
+
+group :test do
+  gem "capybara"
+  gem "chromedriver-helper"
+  gem "selenium-webdriver"
 end
 
 ruby "2.4.2"
