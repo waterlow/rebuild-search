@@ -1,26 +1,18 @@
-<template>
-  <div>
-    <form>
-      <div>
-        <input placeholder="ex) naoya" v-model="contributor"></input>
-        <input placeholder="ex) react" v-model="showNote"></input>
-      </div>
-    </form>
-
-    <article v-for="episode in filteredUsers">
-      <h2>{{ episode.title }}</h2>
-      <p>{{ episode.description }}</p>
-      <div v-show="episode.show">
-        <a href="#" @click.prevent="onClickShowNoteLink(episode)">show noteを閉じる</a>
-        <p v-for="show_note in episode.show_notes">
-          <a :href="show_note.url">{{show_note.text}}</a>
-        </p>
-      </div>
-      <div v-show="!episode.show">
-        <a href="#" @click.prevent="onClickShowNoteLink(episode)">show noteを開く</a>
-      </div>
-    </article>
-  </div>
+<template lang="pug">
+div
+  form
+    div
+      input(placeholder='ex) naoya', v-model='contributor')
+      input(placeholder='ex) react', v-model='showNote')
+  article(v-for='episode in filteredUsers')
+    h2 {{ episode.title }}
+    p {{ episode.description }}
+    div(v-show='episode.show')
+      a(href='#', @click.prevent='onClickShowNoteLink(episode)') show noteを閉じる
+      p(v-for='show_note in episode.show_notes')
+        a(:href='show_note.url') {{show_note.text}}
+    div(v-show='!episode.show')
+      a(href='#', @click.prevent='onClickShowNoteLink(episode)') show noteを開く
 </template>
 
 <script>
