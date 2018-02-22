@@ -1,10 +1,11 @@
 <template lang="pug">
 div
-  form
-    div
-      input(placeholder='ex) naoya', v-model='contributor')
-      input(placeholder='ex) react', v-model='showNote')
-  article
+  b-form(inline='')
+    label.sr-only(for='name') Name
+    b-input#name.mb-2.mr-sm-2.mb-sm-0(placeholder='hak' v-model='contributor')
+    label.sr-only(for='shownote') Shownote
+    b-input#shownote.mb-2.mr-sm-2.mb-sm-0(placeholder='React' v-model='showNote')
+  article.episodes
     EpisodeItem(v-for='episode in filteredUsers',
                 :key='episode.id',
                 :episode='episode',

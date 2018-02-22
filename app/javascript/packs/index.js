@@ -12,9 +12,10 @@ import App from '../app.vue'
 
 import 'bootstrap/dist/css/bootstrap'
 import 'bootstrap-vue/dist/bootstrap-vue'
+import '../css/index'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const el = document.body.appendChild(document.createElement('hello'))
+  const el = document.getElementById('app');
   const app = new Vue({
     el,
     render: h => h(App)
