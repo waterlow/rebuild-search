@@ -1,5 +1,5 @@
 class Episode < ApplicationRecord
-  has_many :show_notes, dependent: :delete_all
+  has_many :show_notes, -> { order(:position) }, dependent: :delete_all
   has_many :episode_contributors, dependent: :delete_all
   has_many :contributors, through: :episode_contributors
 

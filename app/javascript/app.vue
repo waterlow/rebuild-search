@@ -15,6 +15,16 @@ div
 <script>
 import axios from 'axios'
 import EpisodeItem from './EpisodeItem.vue'
+
+const fetchEpisodes = (data, limit) => {
+  const path = `/episodes${limit ? `?limit=${limit}` : '' }`
+  axios.get(path).then((response) => {
+    data.episodes = response.data.map(
+      d => ({ ...d, show: false })
+    )
+  });
+}
+
 export default {
   components: {
     EpisodeItem
@@ -29,11 +39,8 @@ export default {
   },
 
   mounted () {
-    axios.get('/episodes').then((response) => {
-      this.$data.episodes = response.data.map(
-        d => ({ ...d, show: false })
-      )
-    });
+    fetchEpisodes(this.$data, 10)
+    fetchEpisodes(this.$data)
   },
 
   computed: {
