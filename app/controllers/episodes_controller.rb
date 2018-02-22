@@ -1,5 +1,5 @@
 class EpisodesController < ApplicationController
-  caches_action :index
+  # caches_action :index
   before_action { request.format = :json }
 
   def index
