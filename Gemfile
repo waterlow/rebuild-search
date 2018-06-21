@@ -12,7 +12,7 @@ gem "mechanize"
 gem "pg", "~> 0.18"
 gem "puma", "~> 3.7"
 gem "rails", "~> 5.1.4"
-gem "webpacker"
+gem "webpacker", "~> 3.2.0"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
@@ -34,7 +34,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara"
+  gem "capybara", "~> 2.18"
   gem "chromedriver-helper"
   gem "selenium-webdriver"
 end
